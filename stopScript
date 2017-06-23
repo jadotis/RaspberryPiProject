@@ -1,0 +1,5 @@
+#! /bin/sh
+
+pid_num=$(ps -C "python" -o pid=)
+kill -2 $pid_num
+exit 0

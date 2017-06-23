@@ -1,0 +1,13 @@
+#! /bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+
+sleep 10
+ifconfig | mail -s "IP" jadotis@bu.edu
+ifconfig | mail -s "IP" jmbiel@bu.edu
+pigpiod -t 0
+echo "Success!" > /home/jm/Desktop/success.txt
+exit 0

@@ -1,0 +1,34 @@
+#! /usr/bin/expect
+#Script for stopping the remote Raspberry Pi clock
+
+set timeout 5
+
+log_file errorFile
+spawn ssh jadotis@csa1.bu.edu
+expect "password:"
+send "yes\r"
+expect "password:"
+send "\r"
+expect "]"
+send "ssh jm@168.122.4.198\r"
+expect "password:"
+send "yes\r"
+expect "password:"
+send "marcus\r"
+expect ":"
+send "marcus\r"
+expect "$"
+send "sudo -s\r"
+expect ":"
+send "marcus\r"
+expect "#"
+send "/home/jm/Desktop/a3/stopScript\r"
+expect "$"
+send "exit\r"
+expect "$"
+send "exit\r"
+expect "$"
+send "exit\r"
+log_file
+interact
+exit

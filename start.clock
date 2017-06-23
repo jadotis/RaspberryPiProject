@@ -1,0 +1,44 @@
+#! /usr/bin/expect
+#Begin Script
+
+set mode [lindex $argv 0];
+set t_mode [lindex $argv 1];
+if { $mode == ""} {
+    set mode "minutes"
+}
+
+if { $t_mode == ""} {
+    set t_mode "EST"
+}
+
+set timeout 5
+log_file errorFile
+spawn ssh jadotis@csa1.bu.edu
+expect "password:"
+send "yes\r"
+expect "password:" 
+send "\r" <------Insert Password for Bu Authentication Here
+expect "]"
+send "ssh jm@168.122.4.198\r"
+expect "password:"
+send "yes\r"
+expect "password:"
+send "marcus\r"
+expect "jm@trojan-pi:~$"
+send "sudo -s\r"
+expect ":"
+send "marcus\r"
+expect "#"
+send "pigpiod -t 0\r"
+expect "#"
+send "python /home/jm/Desktop/a3/startClock.py $mode $t_mode &\r"
+sleep 1
+expect "#"
+send "exit\r"
+expect "$"
+send "exit\r"
+expect "$"
+send "exit\r"
+log_file
+interact
+exit
